@@ -10,7 +10,11 @@ public class AdManager : MonoBehaviour
     private BannerView bannerView;
     private InterstitialAd interstitial;
     private RewardedAd rewardedAd;
+    [SerializeField] private string bannerId;
+    [SerializeField] private string interstitialId;
+    [SerializeField] private string rewardedVideoId;
     [SerializeField] private Button rewardedAdButton;
+    [SerializeField] private bool isTestMode;
 
     public void Start()
     {
@@ -24,6 +28,12 @@ public class AdManager : MonoBehaviour
 
         #if UNITY_ANDROID
             string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+            if (!isTestMode)
+            {
+                adUnitId = bannerId; 
+                Debug.Log("Actual id FIRED!!!!!!!");
+            }
+                
         #elif UNITY_IPHONE
             string adUnitId = "ca-app-pub-3940256099942544/2934735716";
         #else
@@ -56,6 +66,8 @@ public class AdManager : MonoBehaviour
     {
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+        if (!isTestMode)
+            adUnitId = interstitialId;
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-3940256099942544/4411468910";
 #else
@@ -87,6 +99,8 @@ public class AdManager : MonoBehaviour
     {
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        if (!isTestMode)
+            adUnitId = rewardedVideoId;
 #elif UNITY_IPHONE
             string adUnitId = "ca-app-pub-3940256099942544/1712485313";
 #else
@@ -205,12 +219,7 @@ public class AdManager : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
-        string type = args.Type;
-        double amount = args.Amount;
-        MonoBehaviour.print(
-            "HandleRewardedAdRewarded event received for "
-            + amount.ToString() + " " + type);
-        GameManager.Singleton.ContinueGame();
+        //Fill here
     }
     
     
