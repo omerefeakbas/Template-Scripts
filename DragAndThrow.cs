@@ -71,7 +71,6 @@ public class DragAndThrow : MonoBehaviour
     }
     Vector3 DrawTrajectory(Vector3 force, float time) //Calculate the necessary positions for line renderer
     {
-        //TODO
         Vector3 vo = force * power;
         Vector3 Vxz = vo;
         Vxz.y = 0;
